@@ -1,0 +1,40 @@
+package academy.backend.market_pulse.refactoring.selfwork;
+
+public enum InstrumentType {
+    STOCK("Акция", 2, 10),
+    BOND("Облигация", 1, 1),
+    ETF("Фонд", 2, 1);
+
+    private final String label;
+    private final int settlementDays;
+    private final int lotSize;
+
+    InstrumentType(String label, int settlementDays, int lotSize) {
+        this.label = label;
+        this.settlementDays = settlementDays;
+        this.lotSize = lotSize;
+    }
+
+    public String label() {
+        return label;
+    }
+
+    public int settlementDays() {
+        return settlementDays;
+    }
+
+    public int lotSize() {
+        return lotSize;
+    }
+
+    public static InstrumentType of(String type) {
+        if (type == null) {
+            throw new IllegalArgumentException("Неизвестный тип инструмента: " + type);
+        }
+        try {
+            return InstrumentType.valueOf(type.toUpperCase());
+        } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Неизвестный тип инструмента: " + type);
+        }
+    }
+}
